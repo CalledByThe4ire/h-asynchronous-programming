@@ -1,23 +1,20 @@
-##
-[![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/hexletguides.github.io/master/images/hexlet_logo128.png)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package)
+### info.js
 
-This repository is created and maintained by the team and the community of Hexlet, an educational project. [Read more about Hexlet (in Russian)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package).
-##
+Реализуйте и экспортируйте функцию `getDirectorySize`, которая считает размер переданной директории (не включая поддиректории). Анализ размера файла должен происходить паралелльно, для этого воспользуйтесь библиотекой *async*
 
-# nodejs-package
+```
+import { getDirectorySize } from './info';
 
-[![Code Climate](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/gpa.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Issue Count](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/issue_count.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Build Status](https://travis-ci.org/hexlet-boilerplates/nodejs-package.svg?branch=master)](https://travis-ci.org/hexlet-boilerplates/nodejs-package)
+getDirectorySize('/usr/local/bin', (err, size) => {
+  console.log(size);
+});
 
-## Setup
-
-```sh
-$ make install
 ```
 
-## Run tests
+### Подсказка
 
-```sh
-$ make test
-```
+-   [fs.readdir](https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback) - чтение содержимого директории
+-   [path.join](https://nodejs.org/api/path.html#path_path_join_paths) - конструирует пути
+-   [async.map](http://caolan.github.io/async/docs.html#map)
+-   [fs.stat](https://nodejs.org/api/fs.html#fs_fs_stat_path_options_callback) - информация о файле
+-   [_.sumBy](https://lodash.com/docs/4.17.11#sumBy) - нахождение суммы в массиве
