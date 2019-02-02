@@ -1,23 +1,15 @@
-##
-[![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/hexletguides.github.io/master/images/hexlet_logo128.png)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package)
+### info.js
 
-This repository is created and maintained by the team and the community of Hexlet, an educational project. [Read more about Hexlet (in Russian)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package).
-##
+Реализуйте и экспортируйте функцию `compareFileSizes`, которая сравнивает размеры двух файлов. Если первый больше второго, то она возвращает единицу, если размеры равны то ноль, иначе - -1.
 
-# nodejs-package
+```
+import { compareFileSizes } from './info';
 
-[![Code Climate](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/gpa.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Issue Count](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/issue_count.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Build Status](https://travis-ci.org/hexlet-boilerplates/nodejs-package.svg?branch=master)](https://travis-ci.org/hexlet-boilerplates/nodejs-package)
+compareFileSizes('file1', 'file2', (_err, result) => console.log(result));
 
-## Setup
-
-```sh
-$ make install
 ```
 
-## Run tests
+### Подсказка
 
-```sh
-$ make test
-```
+-   Для реализации этого задания, нужно воспользоваться функцией [fs.stat](https://nodejs.org/api/fs.html#fs_fs_stat_path_options_callback), которая использовалась в примерах теории
+-   [Math.sign](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/sign)
