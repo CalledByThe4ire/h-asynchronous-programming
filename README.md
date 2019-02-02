@@ -1,23 +1,36 @@
-##
-[![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/hexletguides.github.io/master/images/hexlet_logo128.png)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package)
+Это задание напрямую не связано с теорией урока, но позволяет еще больше прокачаться в работе с асинхронным кодом.
 
-This repository is created and maintained by the team and the community of Hexlet, an educational project. [Read more about Hexlet (in Russian)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package).
-##
+В библиотеке [async](http://caolan.github.io/async/docs.html#waterfall) есть функция `waterfall`, которая позволяет строить цепочки асинхронных функций без необходимости вкладывать их друг в друга. Подробнее о том как она работает, посмотрите в документации. Попробуйте решить данное упражнение с применением этой функции.
 
-# nodejs-package
+### file.js
 
-[![Code Climate](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/gpa.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Issue Count](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/issue_count.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Build Status](https://travis-ci.org/hexlet-boilerplates/nodejs-package.svg?branch=master)](https://travis-ci.org/hexlet-boilerplates/nodejs-package)
+Реализуйте и экспортируйте функцию `unionFiles`, которую мы рассматривали в предыдущих уроках. Вот ее обычное решение на колбеках:
 
-## Setup
+```
+import fs from 'fs';
 
-```sh
-$ make install
+const unionFiles = (inputPath1, inputPath2, outputPath, cb) => {
+  fs.readFile(inputPath1, 'utf-8', (error1, data1) => {
+    if (error1) {
+      cb(error1);
+      return;
+    }
+    fs.readFile(inputPath2, 'utf-8', (error2, data2) => {
+      if (error2) {
+        cb(error2);
+        return;
+      }
+      fs.writeFile(outputPath, `${data1}${data2}`, (error3, data3) => {
+        if (error3) {
+          cb(error3);
+          return;
+        }
+        cb(null); // не забываем последний успешный вызов
+      });
+    });
+  });
+}
+
 ```
 
-## Run tests
-
-```sh
-$ make test
-```
+Попробуйте написать его используя указанную выше функцию `waterfall`.
