@@ -1,23 +1,31 @@
-##
-[![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/hexletguides.github.io/master/images/hexlet_logo128.png)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package)
+Это упражнение вы уже делали, но теперь тоже самое нужно сделать с помощью промисов
 
-This repository is created and maintained by the team and the community of Hexlet, an educational project. [Read more about Hexlet (in Russian)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package).
-##
+### file.js
 
-# nodejs-package
+Реализуйте и экспортируйте функцию `move`, которая асинхронно копирует файл из одного места в другое. Ее параметры:
 
-[![Code Climate](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/gpa.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Issue Count](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/issue_count.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Build Status](https://travis-ci.org/hexlet-boilerplates/nodejs-package.svg?branch=master)](https://travis-ci.org/hexlet-boilerplates/nodejs-package)
+1.  Путь до файла исходника
+2.  Путь по которому нужно копировать файл
 
-## Setup
+Алгоритм работы функции следующий:
 
-```sh
-$ make install
+1.  Читаем исходный файл
+2.  Создаем новый файл и записываем туда данные исходного файла
+3.  Удаляем исходный файл
+
+*Реальная функция move устроена не так. Если исходник и приемник находятся на одном устройстве, то копирования не происходит, меняются лишь указатели в фс*
+
+```
+import { move } from './file';
+
+move('/opt/myfile', '/tmp/newfile').then(() => console.log('moved!'));
+
 ```
 
-## Run tests
+Другие примеры смотрите в тестах
 
-```sh
-$ make test
-```
+### Подсказки
+
+-   [fs.unlink](https://nodejs.org/api/fs.html#fs_fspromises_unlink_path) - удаление файла
+-   [fs.readFile](https://nodejs.org/api/fs.html#fs_fspromises_readfile_path_options) - чтение файла
+-   [fs.writeFile](https://nodejs.org/api/fs.html#fs_fspromises_writefile_file_data_options) - запись файла
