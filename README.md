@@ -1,23 +1,36 @@
-##
-[![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/hexletguides.github.io/master/images/hexlet_logo128.png)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package)
+### file.js
 
-This repository is created and maintained by the team and the community of Hexlet, an educational project. [Read more about Hexlet (in Russian)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package).
-##
+Реализуйте и экспортируйте функцию `move`, которая асинхронно копирует файл из одного места в другое. Ее параметры:
 
-# nodejs-package
+1.  Путь до файла исходника
+2.  Путь по которому нужно копировать файл
+3.  Колбек, у которого единственный аргумент - ошибка.
 
-[![Code Climate](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/gpa.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Issue Count](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/issue_count.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Build Status](https://travis-ci.org/hexlet-boilerplates/nodejs-package.svg?branch=master)](https://travis-ci.org/hexlet-boilerplates/nodejs-package)
+Алгоритм работы функции следующий:
 
-## Setup
+1.  Читаем исходный файл
+2.  Создаем новый файл и записываем туда данные исходного файла
+3.  Удаляем исходный файл
 
-```sh
-$ make install
+*Реальная функция move устроена не так. Если исходник и приемник находятся на одном устройстве, то копирования не происходит, меняются лишь указатели в фс*
+
+```
+import { move } from './file';
+
+move('/opt/myfile', '/tmp/newfile', (error) => {
+  if (error) {
+    console.log('oops');
+    return;
+  }
+  console.log('yes!')
+});
+
 ```
 
-## Run tests
+Другие примеры смотрите в тестах
 
-```sh
-$ make test
-```
+### Подсказки
+
+-   [fs.unlink](https://nodejs.org/api/fs.html#fs_fs_unlink_path_callback) - удаление файла
+-   [fs.readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback) - чтение файла
+-   [fs.writeFile](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback) - запись в файл
