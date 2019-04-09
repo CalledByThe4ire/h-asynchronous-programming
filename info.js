@@ -2,10 +2,10 @@
 import fs from 'fs';
 
 // BEGIN (write your solution here)
-export const compareFileSizes = (filePath1, filePath2, cb) => {
-  fs.stat(filePath1, (_error1, stat1) => {
-    fs.stat(filePath2, (_error2, stat2) => {
-      cb(null, Math.sign(stat1.size - stat2.size));
+export const compareFileSizes = (filepath1, filepath2, cb) => {
+  fs.stat(filepath1, (_error1, { size: size1 }) => {
+    fs.stat(filepath2, (_error2, { size: size2 }) => {
+      cb(null, Math.sign(size1 - size2));
     });
   });
 };
