@@ -1,9 +1,23 @@
 /* eslint-disable import/prefer-default-export */
-import path from 'path';
-import fs from 'fs';
-import _ from 'lodash';
-import async from 'async';
+import { join } from 'path';
+import { readdir, stat } from 'fs';
+import { sumBy } from 'lodash';
+import map from 'async/map';
 
 // BEGIN (write your solution here)
-
+export const getDirectorySize = (dirPath, cb) => {
+  readdir(dirPath, (readError, filenames) => {
+    if (readError) {
+      cb(readError);
+      return;
+    }
+    const paths = filenames.map(file => join(dirPath, file));
+    map(paths, stat, (statsError, result) => {
+      if (statsError) {
+        cb(statsError);
+      }
+      cb(null, sumBy(result, 'size'));
+    });
+  });
+};
 // END
