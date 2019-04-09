@@ -2,18 +2,18 @@
 import fs from 'fs';
 
 // BEGIN (write your solution here)
-export const move = (srcPath, destPath, cb) => {
-  fs.readFile(srcPath, (_err1, data1) => {
-    if (_err1) {
-      cb(_err1);
+export const move = (from, to, cb) => {
+  fs.readFile(from, 'utf-8', (error1, data) => {
+    if (error1) {
+      cb(error1);
       return;
     }
-    fs.writeFile(destPath, data1, (_err2) => {
-      if (_err2) {
-        cb(_err2);
+    fs.writeFile(to, data, (error2) => {
+      if (error2) {
+        cb(error2);
         return;
       }
-      fs.unlink(srcPath, cb);
+      fs.unlink(from, cb);
     });
   });
 };
