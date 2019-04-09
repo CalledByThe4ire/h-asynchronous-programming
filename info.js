@@ -5,18 +5,15 @@ import { sumBy } from 'lodash';
 import map from 'async/map';
 
 // BEGIN (write your solution here)
-export const getDirectorySize = (dirPath, cb) => {
-  readdir(dirPath, (readError, filenames) => {
-    if (readError) {
-      cb(readError);
+export const getDirectorySize = (dirpath, cb) => {
+  readdir(dirpath, (error1, filenames) => {
+    if (error1) {
+      cb(error1);
       return;
     }
-    const paths = filenames.map(file => join(dirPath, file));
-    map(paths, stat, (statsError, result) => {
-      if (statsError) {
-        cb(statsError);
-      }
-      cb(null, sumBy(result, 'size'));
+    const filepaths = filenames.map(name => join(dirpath, name));
+    map(filepaths, stat, (error2, stats) => {
+      cb(error2, sumBy(stats, 'size'));
     });
   });
 };
