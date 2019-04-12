@@ -2,9 +2,7 @@
 import { promises as fs } from 'fs';
 
 // BEGIN (write your solution here)
-export const move = (filePath, output) =>
-  fs
-    .readFile(filePath, 'utf-8')
-    .then(data => fs.writeFile(output, data))
-    .then(() => fs.unlink(filePath));
+export const move = (from, to) => fs.readFile(from, 'utf-8')
+  .then(data => fs.writeFile(to, data))
+  .then(() => fs.unlink(from));
 // END
