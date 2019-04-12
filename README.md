@@ -1,23 +1,25 @@
-##
-[![Hexlet Ltd. logo](https://raw.githubusercontent.com/Hexlet/hexletguides.github.io/master/images/hexlet_logo128.png)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package)
+### ls.js
 
-This repository is created and maintained by the team and the community of Hexlet, an educational project. [Read more about Hexlet (in Russian)](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package).
-##
+Реализуйте и экспортируйте по умолчанию функцию, которая принимает на вход путь и возвращает информацию о файлах и директориях расположенных по этому пути. Данные возвращаются в виде массива объектов, где каждый элемент это информация о конкретном файле: его путь и описание доступов (`stat.mode`). Объекты в массиве должны быть отсортированы по имени файла.
 
-# nodejs-package
+```
+import ls from '../ls';
 
-[![Code Climate](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/gpa.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Issue Count](https://codeclimate.com/github/hexlet-boilerplates/javascript-package/badges/issue_count.svg)](https://codeclimate.com/github/hexlet-boilerplates/javascript-package)
-[![Build Status](https://travis-ci.org/hexlet-boilerplates/nodejs-package.svg?branch=master)](https://travis-ci.org/hexlet-boilerplates/nodejs-package)
+await ls('/var');
+// [
+//   { filepath: '/var/local', mode: 17917 },
+//   { filepath: '/var/lock', mode: 17407 },
+//   { filepath: '/var/log', mode: 16877 },
+// ];
 
-## Setup
+await ls('/etc/passwd');
+// [{ '/etc/passwd', mode: 33188 }];
 
-```sh
-$ make install
 ```
 
-## Run tests
+Эта функция должна уметь обрабатывать не только директории, но и файлы. В таком случае отдается массив с одним объектом - информацией по текущему файлу.
 
-```sh
-$ make test
-```
+### Подсказка
+
+-   `readdir()` - чтение директории
+-   `stat()` - информация о файле. `isFile()` - является ли файлом, `mode` - описание доступа.
