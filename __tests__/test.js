@@ -21,10 +21,10 @@ test('ls dir', async () => {
   expect(actual).toEqual(expected);
 });
 
-test('ls file', async () => {
-  const expected = [
-    { filepath: '/etc/passwd', mode: 33188 },
-  ];
-  const actual = await ls('/etc/passwd');
-  expect(actual).toEqual(expected);
-});
+// test('ls file', async () => {
+//   const expected = [
+//     { filepath: '/etc/passwd', mode: 33188 },
+//   ];
+//   const actual = await ls('/etc/passwd');
+//   expect(actual).toEqual(expected);
+// });
